@@ -24,15 +24,68 @@ public class Encryption {
         this.encryptionKey = 3;
         this.encryptionRemainder = remainder;
         phraseNotEncrypted = new ArrayList<Character>();
+        //checking for a valid phrase, NOT VALID if:
+            // there are numbers
+            // there are symbols and things that are not letters
+
         this.phraseNotEncrypted = parsePhrase(phrase);
     }
-
-    public ArrayList<Character> parsePhrase(String phrase){
-        ArrayList<Character> parsedPhrase = new ArrayList<Character>();
-        for(int i=0;i<phrase.length();i++)
-        {
-            parsedPhrase.add(phrase.charAt(i));
+    public boolean isValidPhrase(String phrase){
+        boolean isPhrase = true;
+        ArrayList<Character> containsNumbers = new ArrayList<Character>();
+        for (int i = 0; i < 11 ; i++ ){
+            char iCount = (char)i;
+            for (int k = 0; k < phrase.length() ; k++ ){
+                if(phrase.charAt(k) == iCount){
+                    isPhrase = false;
+                    containsNumbers.add(phrase.charAt(k));
+                }
+            }
         }
-        return parsedPhrase;
+        System.out.println("Your phrase was not a valid input. It contained the following numbers: ");
+        for (Character c : containsNumbers) {
+            System.out.print(" " + c);
+        }
+        return isPhrase;
+    }
+
+
+    public boolean isValidPangram(String phrase) {
+        boolean isPangram = true;
+        ArrayList<Character> doesNotContainLetters = new ArrayList<Character>();
+        ArrayList<Character> containsNumbers = new ArrayList<Character>();
+        for (char ch = 'a'; ch <= 'z'; ch++) {
+            // Check if the string does not
+            // contain all the letters
+            if (!phrase.contains(String.valueOf(ch))) {
+                isPangram = false;
+                doesNotContainLetters.add(ch);
+            }
+        }
+        System.out.println("Your phrase was not a valid input. it did not have the following letters: ");
+        //loop through list to print off missing characters
+        for (Character c : doesNotContainLetters) {
+            System.out.print(" " + c);
+        }
+        return isPangram;
+    }
+
+
+    public ArrayList<Character> parsePhrase(String phrase) {
+        //maybe add logic to allow users to use punctuation, and then remove it here???
+        ArrayList<Character> parsedPhrase = new ArrayList<Character>();
+        phrase = phrase.toLowerCase();
+
+        //1. Take phrase and remove all non-letters out of it
+        //fixme
+        //2. Parse
+
+        // Take each character of the given string and save it as an entry inside a
+        // temporary ArrayList, which will contain our parsed pangram phrase for the constructor.
+            for (int i = 0; i < phrase.length(); i++) {
+                // Adding each character of phrase into ArrayList
+                parsedPhrase.add(phrase.charAt(i));
+            }
+            return parsedPhrase;
     }
 }

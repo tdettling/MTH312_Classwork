@@ -49,28 +49,6 @@ public class Encryption {
         return isPhrase;
     }
 
-
-    public boolean isValidPangram(String phrase) {
-        boolean isPangram = true;
-        ArrayList<Character> doesNotContainLetters = new ArrayList<Character>();
-        ArrayList<Character> containsNumbers = new ArrayList<Character>();
-        for (char ch = 'a'; ch <= 'z'; ch++) {
-            // Check if the string does not
-            // contain all the letters
-            if (!phrase.contains(String.valueOf(ch))) {
-                isPangram = false;
-                doesNotContainLetters.add(ch);
-            }
-        }
-        System.out.println("Your phrase was not a valid input. it did not have the following letters: ");
-        //loop through list to print off missing characters
-        for (Character c : doesNotContainLetters) {
-            System.out.print(" " + c);
-        }
-        return isPangram;
-    }
-
-
     public ArrayList<Character> parsePhrase(String phrase) {
         //maybe add logic to allow users to use punctuation, and then remove it here???
         ArrayList<Character> parsedPhrase = new ArrayList<Character>();

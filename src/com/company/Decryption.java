@@ -23,13 +23,13 @@ public class Decryption {
         if(isValidValue(multiplier)) {
             this.decryptionMultiplier = multiplier;
         }else{
-            this.decryptionMultiplier = 5;
+            this.decryptionMultiplier = 3;
         }
 
         if(isValidValue(addedNum)) {
             this.decryptionAddedNumber = addedNum;
         }else{
-            this.decryptionAddedNumber = 3;
+            this.decryptionAddedNumber = 2;
         }
 
         if(isValidPhrase(phrase)){
@@ -72,11 +72,9 @@ public class Decryption {
         //maybe add logic to allow users to use punctuation, and then remove it here???
         ArrayList<Character> parsedPhrase = new ArrayList<Character>();
         phrase = phrase.toLowerCase();
-
         //1. Take phrase and remove all non-letters out of it
         //fixme
         //2. Parse
-
         // Take each character of the given string and save it as an entry inside a
         // temporary ArrayList, which will contain our parsed pangram phrase for the constructor.
         for (int i = 0; i < phrase.length(); i++) {
@@ -86,5 +84,8 @@ public class Decryption {
         return parsedPhrase;
     }
 
-
+    public int gcfExtended(int a, int b, int x, int y){
+    //fixme
+        return -1;
+    }
 }

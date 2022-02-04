@@ -36,7 +36,13 @@ public class Encryption {
         //checking for a valid phrase, NOT VALID if:
             // there are numbers
             // there are symbols and things that are not letters
-        this.phraseNotEncrypted = parsePhrase(phrase);
+        if(isValidPhrase(phrase)) {
+            this.phraseNotEncrypted = parsePhrase(phrase);
+        }else{
+            System.out.println("Your input was invalid. Phrase is: ");
+            System.out.println("why cant we be a vast quilt of grim jokes and oxidized copper");
+            this.phraseNotEncrypted = parsePhrase("why cant we be a vast quilt of grim jokes and oxidized copper");
+        }
     }
     public boolean isValidPhrase(String phrase){
         boolean isPhrase = true;
@@ -60,7 +66,9 @@ public class Encryption {
     public ArrayList<Character> parsePhrase(String phrase) {
         //maybe add logic to allow users to use punctuation, and then remove it here???
         ArrayList<Character> parsedPhrase = new ArrayList<Character>();
-        phrase = phrase.toLowerCase();
+        String phraseTemp = phrase.toLowerCase();
+        phrase = phraseTemp.replaceAll("\\s", "");
+
 
         //1. Take phrase and remove all non-letters out of it
         //fixme
@@ -90,8 +98,9 @@ public class Encryption {
         ArrayList<Character> encrypted = new ArrayList<Character>();
 
         for(int i = 0; i< notEncrypted.size(); i++){
-            int x = (encryptionMultiplier*i+encryptionRemainder)%26;
-            encrypted.add(alphabet.charAt(x));
+            int clearIndex = alphabet.indexOf(phraseNotEncrypted.get(i));
+            int encryptedIndex = (encryptionMultiplier*clearIndex+encryptionRemainder)%26;
+            encrypted.add(i, alphabet.charAt(encryptedIndex));
         }
         return encrypted;
     }
@@ -108,6 +117,12 @@ public class Encryption {
     public void printEncryption(){
         ArrayList<Character> encryptedPhrase = new ArrayList<Character>();
         encryptedPhrase = encryptPhrase(phraseNotEncrypted);
+        System.out.println("Before encryption: ");
+        for( Character a: phraseNotEncrypted){
+            System.out.print(" "+ a);
+        }
+
+        System.out.println("After encryption: ");
         for( Character c: encryptedPhrase){
             System.out.print(" "+ c);
         }
